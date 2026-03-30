@@ -1,3 +1,4 @@
+package Array;
 public class Second_largest_element {
     public static int second_largest(int[] arr){
         if (arr.length < 2) {

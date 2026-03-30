@@ -1,3 +1,4 @@
+package Array;
 public class array {
     static int [] nums = new int[100];
     static int n = 0;

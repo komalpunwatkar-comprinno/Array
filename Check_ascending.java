@@ -1,3 +1,4 @@
+package Array;
 public class Check_ascending {
     public static boolean Check_if_ascending(int[]arr){
         

@@ -1,3 +1,4 @@
+package Array;
 import java.util.*;
 
 public class taskManagementSystem {
@@ -22,7 +23,7 @@ public class taskManagementSystem {
             System.out.println("5. Search Task");
             System.out.println("6. Sort Tasks");
             System.out.println("7. Undo Last Action");
-            System.out.println("8. Process Next Task (Queue)");
+            System.out.println("8. Process Next Task");
             System.out.println("9. Exit");
 
             int choice = sc.nextInt();
@@ -75,7 +76,7 @@ public class taskManagementSystem {
         }
     }
 
-    // 🔹 Add Task
+    
     public static void addTask(String task) {
         if (taskSet.contains(task)) {
             System.out.println("Duplicate task!");
@@ -93,7 +94,7 @@ public class taskManagementSystem {
         System.out.println("Task added!");
     }
 
-    // 🔹 Show Tasks
+   
     public static void showTasks() {
         for (int i = 0; i < size; i++) {
             String status = completed[i] ? "Done" : "Pending";
@@ -101,7 +102,7 @@ public class taskManagementSystem {
         }
     }
 
-    // 🔹 Complete Task
+    
     public static void completeTask(int index) {
         if (index >= 0 && index < size) {
             completed[index] = true;
@@ -110,7 +111,7 @@ public class taskManagementSystem {
         }
     }
 
-    // 🔹 Delete Task
+    
     public static void deleteTask(int index) {
         if (index >= 0 && index < size) {
             undoStack.push("DELETE:" + tasks[index]);
@@ -125,7 +126,7 @@ public class taskManagementSystem {
         }
     }
 
-    // 🔹 Search Task (String + Searching)
+    
     public static void searchTask(String keyword) {
         for (int i = 0; i < size; i++) {
             if (tasks[i].toLowerCase().contains(keyword.toLowerCase())) {
@@ -134,7 +135,7 @@ public class taskManagementSystem {
         }
     }
 
-    // 🔹 Sort Tasks (Simple Bubble Sort)
+    
     public static void sortTasks() {
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
@@ -148,7 +149,7 @@ public class taskManagementSystem {
         System.out.println("Tasks sorted!");
     }
 
-    // 🔹 Undo (Stack)
+    
     public static void undo() {
         if (undoStack.isEmpty()) {
             System.out.println("Nothing to undo");
@@ -159,19 +160,35 @@ public class taskManagementSystem {
 
         if (action.startsWith("ADD:")) {
             String task = action.substring(4);
-            deleteTask(size - 1);
+            for (int i = 0; i < size; i++) {
+                if (tasks[i].equals(task)) {
+                    deleteTask(i);
+                    break;
+                }
+            }
+            System.out.println("Undid task: " + task);
         }
 
         System.out.println("Undo performed");
     }
 
-    // 🔹 Queue Processing
+    
     public static void processTask() {
-        if (taskQueue.isEmpty()) {
-            System.out.println("No tasks in queue");
-            return;
-        }
+    if (taskQueue.isEmpty()) {
+        System.out.println("No tasks in queue");
+        return;
+    }
+     
+    String task = taskQueue.poll();
+    System.out.println("Processing: " + task);
 
-        System.out.println("Processing: " + taskQueue.poll());
+    
+    for (int i = 0; i < size; i++) {
+        if (tasks[i].equals(task)) {
+            completed[i] = true;
+            undoStack.push("COMPLETE:" + task);
+            break;
+        }
+    }
     }
 }

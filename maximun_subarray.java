@@ -1,3 +1,4 @@
+package Array;
 public class maximun_subarray {
     public int maxSubArray(int[] nums) {
         int result = nums[0];

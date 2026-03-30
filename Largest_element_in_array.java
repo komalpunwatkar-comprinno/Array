@@ -1,3 +1,4 @@
+package Array;
 public class Largest_element_in_array {
     public static int largest(int[] arr) {
         int max = arr[0];   // assume first element is largest

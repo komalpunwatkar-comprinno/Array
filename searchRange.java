@@ -1,3 +1,4 @@
+package Array;
 public class searchRange{
 
     public static int[] search_Range(int[] nums, int target) {

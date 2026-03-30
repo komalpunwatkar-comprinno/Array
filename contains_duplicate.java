@@ -1,3 +1,4 @@
+package Array;
 public class contains_duplicate {
     public static boolean contains_Duplicate(int[] nums) {
         for(int i=0; i<nums.length; i++){
